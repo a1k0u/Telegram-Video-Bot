@@ -58,3 +58,9 @@ file-too-large-text = ⚠️ <b>Файл слишком большой:</b> {$si
     • Снизьте битрейт видео
     • Обрежьте лишние части
     • Используйте онлайн-компрессор (например, VideoSmaller)
+
+post-to-channel-button = 📣 Опубликовать в канал
+posted-to-channel-text = ✅ Опубликовано в канале
+post-to-channel-failed-text = ❌ Не удалось опубликовать: {$error}
+
+access-denied-text = ⛔️ Доступ запрещён

@@ -32,7 +32,7 @@ async def main() -> None:
     i18n_core = FluentRuntimeCore(path="locales/{locale}")
     await i18n_core.startup()
     logger.info(f"Loaded locales: {i18n_core.available_locales}")
-    i18n = I18nMiddleware(core=i18n_core, default_locale="en")
+    i18n = I18nMiddleware(core=i18n_core, default_locale="ru")
 
     dp = Dispatcher()
 

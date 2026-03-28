@@ -6,7 +6,7 @@ import ffmpeg
 from aiogram import Bot
 from aiogram.enums import ChatAction
 from aiogram.exceptions import TelegramBadRequest, TelegramEntityTooLarge, TelegramForbiddenError
-from aiogram.types import FSInputFile, Message
+from aiogram.types import FSInputFile, InlineKeyboardButton, InlineKeyboardMarkup, Message
 from aiogram_i18n import I18nContext
 
 from app.utils.encode import encode_segment
@@ -49,12 +49,29 @@ async def process_video(message: Message, i18n: I18nContext, bot: Bot) -> None:
             current_time += 60
 
         for seg_path, duration, size in segment_paths:
-            await bot.send_video_note(
+            sent = await bot.send_video_note(
                 chat_id=message.chat.id,
                 video_note=FSInputFile(seg_path),
                 duration=duration,
                 length=size
             )
+            try:
+                await bot.edit_message_reply_markup(
+                    chat_id=message.chat.id,
+                    message_id=sent.message_id,
+                    reply_markup=InlineKeyboardMarkup(
+                        inline_keyboard=[
+                            [
+                                InlineKeyboardButton(
+                                    text=i18n.get("post-to-channel-button"),
+                                    callback_data=f"post_circle:{sent.message_id}",
+                                )
+                            ]
+                        ]
+                    ),
+                )
+            except Exception as e:
+                logger.warning(f"Failed to attach post button: {e}")
 
         await proc_msg.delete()
 

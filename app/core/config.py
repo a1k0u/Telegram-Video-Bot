@@ -24,5 +24,14 @@ class Config:
 
         self.BOT_TOKEN: str = os.getenv("BOT_TOKEN")
 
+        channel_id = os.getenv("CHANNEL_ID")
+        if not channel_id:
+            logger.error("Missing required env variable: CHANNEL_ID")
+            sys.exit(1)
+
+        try:
+            self.CHANNEL_ID: int | str = int(channel_id)
+        except ValueError:
+            self.CHANNEL_ID = channel_id
 
 config = Config()
