@@ -13,6 +13,18 @@ from app.handlers import video_router
 from app.middlewares import SecurityMiddleware
 
 
+async def _resolve_channel_label(bot: Bot) -> str:
+    try:
+        chat = await bot.get_chat(config.CHANNEL_ID)
+        if chat.username:
+            return f"@{chat.username}"
+        if chat.title:
+            return chat.title
+    except Exception as e:
+        logger.warning(f"Failed to resolve channel label for {config.CHANNEL_ID}: {e}")
+    return str(config.CHANNEL_ID)
+
+
 async def main() -> None:
     setup_logging()
 
@@ -29,6 +41,8 @@ async def main() -> None:
         BotCommand(command="help", description="📖 Show help information")
     ]
     await bot.set_my_commands(commands)
+    config.set_channel_label(await _resolve_channel_label(bot))
+    logger.info(f"Resolved channel label: {config.CHANNEL_LABEL}")
 
     i18n_core = FluentRuntimeCore(path="locales/{locale}")
     await i18n_core.startup()

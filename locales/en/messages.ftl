@@ -59,8 +59,8 @@ file-too-large-text = ⚠️ <b>File too large:</b> {$size} MB
     • Trim unnecessary parts
     • Use online compressor (e.g., VideoSmaller)
 
-post-to-channel-button = 📣 Post to channel
-posted-to-channel-text = ✅ Posted to channel
+post-to-channel-button = 📣 Post to {$channel}
+posted-to-channel-text = ✅ Posted to {$channel}
 post-to-channel-failed-text = ❌ Failed to post: {$error}
 
 access-denied-text = ⛔️ Access denied

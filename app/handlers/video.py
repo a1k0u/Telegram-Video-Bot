@@ -39,11 +39,11 @@ async def post_circle_to_channel(callback: CallbackQuery, i18n: I18nContext, bot
             message_id=message_id,
         )
         await bot.edit_message_reply_markup(chat_id=from_chat_id, message_id=message_id, reply_markup=None)
-        await callback.answer(i18n.get("posted-to-channel-text"))
+        await callback.answer(i18n.get("posted-to-channel-text", channel=config.CHANNEL_LABEL))
         try:
             await bot.send_message(
                 chat_id=from_chat_id,
-                text=i18n.get("posted-to-channel-text"),
+                text=i18n.get("posted-to-channel-text", channel=config.CHANNEL_LABEL),
                 reply_parameters=ReplyParameters(message_id=message_id),
             )
         except Exception as e:

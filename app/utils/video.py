@@ -9,6 +9,7 @@ from aiogram.exceptions import TelegramBadRequest, TelegramEntityTooLarge, Teleg
 from aiogram.types import FSInputFile, InlineKeyboardButton, InlineKeyboardMarkup, Message
 from aiogram_i18n import I18nContext
 
+from app.core import config
 from app.utils.encode import encode_segment
 
 logger = logging.getLogger(__name__)
@@ -63,7 +64,7 @@ async def process_video(message: Message, i18n: I18nContext, bot: Bot) -> None:
                         inline_keyboard=[
                             [
                                 InlineKeyboardButton(
-                                    text=i18n.get("post-to-channel-button"),
+                                    text=i18n.get("post-to-channel-button", channel=config.CHANNEL_LABEL),
                                     callback_data=f"post_circle:{sent.message_id}",
                                 )
                             ]

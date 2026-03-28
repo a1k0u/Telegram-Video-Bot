@@ -59,8 +59,8 @@ file-too-large-text = ⚠️ <b>Файл слишком большой:</b> {$si
     • Обрежьте лишние части
     • Используйте онлайн-компрессор (например, VideoSmaller)
 
-post-to-channel-button = 📣 Опубликовать в канал
-posted-to-channel-text = ✅ Опубликовано в канале
+post-to-channel-button = 📣 Опубликовать в {$channel}
+posted-to-channel-text = ✅ Опубликовано в {$channel}
 post-to-channel-failed-text = ❌ Не удалось опубликовать: {$error}
 
 access-denied-text = ⛔️ Доступ запрещён

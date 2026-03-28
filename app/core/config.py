@@ -33,6 +33,7 @@ class Config:
             self.CHANNEL_ID: int | str = int(channel_id)
         except ValueError:
             self.CHANNEL_ID = channel_id
+        self.CHANNEL_LABEL: str = str(self.CHANNEL_ID)
 
         self.WHITELIST_USER_IDS: set[int] = self._parse_user_id_list(os.getenv("WHITELIST_USER_IDS", ""))
 
@@ -54,5 +55,8 @@ class Config:
         if user_id is None:
             return False
         return user_id in self.WHITELIST_USER_IDS
+
+    def set_channel_label(self, label: str | None) -> None:
+        self.CHANNEL_LABEL = (label or "").strip() or str(self.CHANNEL_ID)
 
 config = Config()
