@@ -53,7 +53,7 @@ async def post_circle_to_channel(callback: CallbackQuery, i18n: I18nContext, bot
         await callback.answer(i18n.get("post-to-channel-failed-text", error=str(e)), show_alert=True)
 
 
-@router.message(~F.video & ~Command("start") & ~Command("help"))
+@router.message(~F.video & ~(F.text.regexp(r"^/(start|help)(?:@\\w+)?(?:\\s|$)")))
 async def handle_unknown_input(message: Message, i18n: I18nContext) -> None:
     await message.delete()
     await message.answer(i18n.get("unknown-input-text"))

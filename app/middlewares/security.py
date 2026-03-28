@@ -34,8 +34,7 @@ def _describe_message(msg: Message) -> str:
 def _detect_event(update: Update) -> tuple[str, User | None, Message | CallbackQuery | None]:
     """Return (event_name, from_user, actionable_object) for any Update."""
     if update.message is not None:
-        event_name = _describe_message(update.message)
-        return event_name, update.message.from_user, update.message if event_name != "message:other" else None
+        return _describe_message(update.message), update.message.from_user, update.message
 
     if update.callback_query is not None:
         cq = update.callback_query

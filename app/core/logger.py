@@ -18,7 +18,7 @@ def setup_logging() -> None:
     )
 
     logging.getLogger("aiogram.dispatcher").setLevel(logging.INFO)
-    logging.getLogger("aiogram.event").setLevel(logging.ERROR)
+    logging.getLogger("aiogram.event").setLevel(logging.INFO)
 
 
 logger = logging.getLogger(__name__)

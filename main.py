@@ -46,6 +46,7 @@ async def main() -> None:
     try:
         await dp.start_polling(
             bot,
+            allowed_updates=["message", "callback_query"],
             polling_timeout=30,
             handle_as_tasks=True,
             tasks_concurrency_limit=100,
