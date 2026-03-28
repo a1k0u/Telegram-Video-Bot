@@ -1,5 +1,3 @@
-from app.middlewares.allowed_users import AllowedUsersMiddleware
-from app.middlewares.allowed_users_update import AllowedUsersUpdateMiddleware
+from app.middlewares.security import SecurityMiddleware
 
-__all__ = ["AllowedUsersMiddleware", "AllowedUsersUpdateMiddleware"]
-
+__all__ = ["SecurityMiddleware"]

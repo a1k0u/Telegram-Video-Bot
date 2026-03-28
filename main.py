@@ -10,7 +10,7 @@ from aiogram_i18n.cores.fluent_runtime_core import FluentRuntimeCore
 from app.commands import start_router, help_router
 from app.core import logger, setup_logging, config
 from app.handlers import video_router
-from app.middlewares import AllowedUsersMiddleware, AllowedUsersUpdateMiddleware
+from app.middlewares import SecurityMiddleware
 
 
 async def main() -> None:
@@ -41,9 +41,7 @@ async def main() -> None:
         dp.include_router(router)
 
     i18n.setup(dispatcher=dp)
-    dp.update.outer_middleware(AllowedUsersUpdateMiddleware())
-    dp.message.outer_middleware(AllowedUsersMiddleware())
-    dp.callback_query.outer_middleware(AllowedUsersMiddleware())
+    dp.update.outer_middleware(SecurityMiddleware())
 
     try:
         await dp.start_polling(
