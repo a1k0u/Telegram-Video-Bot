@@ -22,9 +22,6 @@ async def post_circle_to_channel(callback: CallbackQuery, i18n: I18nContext, bot
     if not callback.message:
         await callback.answer()
         return
-    if not config.is_user_allowed(callback.from_user.id if callback.from_user else None):
-        await callback.answer(i18n.get("access-denied-text"), show_alert=True)
-        return
 
     _, _, raw_message_id = callback.data.partition(":")
     try:

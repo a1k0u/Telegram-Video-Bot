@@ -34,4 +34,25 @@ class Config:
         except ValueError:
             self.CHANNEL_ID = channel_id
 
+        self.WHITELIST_USER_IDS: set[int] = self._parse_user_id_list(os.getenv("WHITELIST_USER_IDS", ""))
+
+    @staticmethod
+    def _parse_user_id_list(raw: str) -> set[int]:
+        ids: set[int] = set()
+        for part in raw.split(","):
+            part = part.strip()
+            try:
+                ids.add(int(part))
+            except ValueError:
+                logger.error(f"Invalid user id in WHITELIST_USER_IDS: {part!r}. Expected comma-separated integers.")
+                sys.exit(1)
+        return ids
+
+    def is_user_allowed(self, user_id: int | None) -> bool:
+        if not self.WHITELIST_USER_IDS:
+            return True
+        if user_id is None:
+            return False
+        return user_id in self.WHITELIST_USER_IDS
+
 config = Config()

@@ -3,8 +3,6 @@ from aiogram.filters import Command
 from aiogram.types import Message
 from aiogram_i18n import I18nContext
 
-from app.core import config
-
 router = Router(name=__name__)
 
 
